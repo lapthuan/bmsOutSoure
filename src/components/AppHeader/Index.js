@@ -2,7 +2,7 @@ import { BellFilled, MailOutlined } from "@ant-design/icons";
 import { Badge, Drawer, Image, List, Space, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { getComments, getOrders } from "../../API";
-import lion from "./lion.png";
+import logoHCMUTE1 from "./logo HCMUTE1.jpg";
 
 function AppHeader() {
   const [comments, setComments] = useState([]);
@@ -21,7 +21,7 @@ function AppHeader() {
 
   return (
     <div className="AppHeader">
-      <Image width={90} src={lion}></Image>
+      <Image width={90} src={logoHCMUTE1}></Image>
       <Typography.Title>CONTROL MONITOR</Typography.Title>
       <Space>
         <Badge count={comments.length} dot>
