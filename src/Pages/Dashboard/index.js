@@ -7,35 +7,48 @@ import { IoMdFlash } from 'react-icons/io';
 import { ref, onValue, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { database } from "../../connect/firebase";
+import CardValue from "../../components/Card/CardValue";
 
 const { Option } = Select;
 
 
 function Dashboard() {
-
+  const [currentData, setCurrentData] = useState({});
+  const [data, setData] = useState({});
   const [form] = Form.useForm();
   useEffect(() => {
     const dbRef = ref(database, 'CONTROL'); // Đường dẫn đến dữ liệu bạn muốn đọc
     const unsubscribe = onValue(dbRef, (snapshot) => {
       const dataObject = snapshot.val();
       console.log(dataObject);
+      setCurrentData(dataObject);
       const formData = {
-        lock: dataObject.lock,
-        rcm: dataObject.rcm,
-        acc: Number(dataObject.acc),
-        dec: Number(dataObject.dec),
-        minValue: Number(dataObject.minValue),
-        maxValue: Number(dataObject.maxValue),
-        setPointCo: Number(dataObject.setPointCo),
-        mode: dataObject.mode,
-        setFrequency: Number(dataObject.setFrequency),
-        setPointTemp: Number(dataObject.setPointTemp),
-        p: Number(dataObject.p),
-        i: Number(dataObject.i),
-        d: Number(dataObject.d)
+        LOCK: dataObject.LOCK.data,
+        RCM: dataObject.RCM.data,
+        ACC: Number(dataObject.ACC.data),
+        DEC: Number(dataObject.DEC.data),
+        ViMinAO1: Number(dataObject.ViMinAO1.data),
+        ViMaxAO1: Number(dataObject.ViMaxAO1.data),
+        SetpointAO1: Number(dataObject.SetpointAO1.data),
+        OVV: dataObject.OVV.data,
+        OVEDO06: Number(dataObject.OVEDO06.data),
+        P: Number(dataObject.P.data),
+        I: Number(dataObject.I.data),
+        D: Number(dataObject.D.data)
       };
 
       form.setFieldsValue(formData);
+    });
+
+    // Clean up subscription on unmount
+    return () => unsubscribe();
+  }, []);
+  useEffect(() => {
+    const dbRef = ref(database, 'MONITOR'); // Đường dẫn đến dữ liệu bạn muốn đọc
+    const unsubscribe = onValue(dbRef, (snapshot) => {
+      const dataObject = snapshot.val();
+      setData(dataObject)
+      console.log(dataObject);
     });
 
     // Clean up subscription on unmount
@@ -45,8 +58,28 @@ function Dashboard() {
   const handleSave = () => {
     form.validateFields()
       .then(values => {
+        const formattedData = {
+          "ACC": { "data": values.ACC },
+          "D": { "data": values.D },
+          "DEC": { "data": values.DEC },
+          "I": { "data": values.I },
+          "LOCK": { "data": values.LOCK },
+          "OVEDO06": { "data": values.OVEDO06 },
+          "OVV": { "data": values.OVV },
+          "P": { "data": values.P },
+          "RCM": { "data": values.RCM },
+          "SetpointAO1": { "data": values.SetpointAO1 },
+          "ViMaxAO1": { "data": values.ViMaxAO1 },
+          "ViMinAO1": { "data": values.ViMaxAO1 }
+        };
+
+        const updatedData = {
+          ...currentData,
+          ...formattedData,
+        };
+        console.log(updatedData);
         const dbRef = ref(database, 'CONTROL');
-        set(dbRef, values)
+        set(dbRef, updatedData)
           .then(() => {
             message.success("Data updated successfully!");
           })
@@ -66,7 +99,7 @@ function Dashboard() {
       <Typography.Text>MONITOR SYSTERM</Typography.Text>
       <Space direction="horizontal" align="baseline">
 
-        <CardNoValue
+        <CardValue
           icon={
             <FaBolt
               style={{
@@ -79,8 +112,9 @@ function Dashboard() {
             />
           }
           title={"Điện áp"}
+          value={data?.O_VOLTAGE?.data}
         />
-        <CardNoValue
+        <CardValue
           icon={
             <FaWaveSquare
               style={{
@@ -93,8 +127,9 @@ function Dashboard() {
             />
           }
           title={"Dòng điện"}
+          value={data?.O_CURRENT?.data}
         />
-        <CardNoValue
+        <CardValue
           icon={
             <IoMdFlash
               style={{
@@ -108,7 +143,7 @@ function Dashboard() {
           }
           title={"Tần số"}
         />
-        <CardNoValue
+        <CardValue
           icon={
             <MdSpeed
               style={{
@@ -121,8 +156,9 @@ function Dashboard() {
             />
           }
           title={"Tốc độ"}
+          value={data?.O_RPM?.data}
         />
-        <CardNoValue
+        <CardValue
           icon={
             <MdPower
               style={{
@@ -135,8 +171,9 @@ function Dashboard() {
             />
           }
           title={"Công suất"}
+          value={data?.O_POWER?.data}
         />
-        <CardNoValue
+        <CardValue
           icon={
             <MdSignalCellularAlt
               style={{
@@ -162,41 +199,23 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <Form.Item label="Lock" name="lock">
+            <Form.Item label="Lock" name="LOCK">
               <Select>
                 <Option value={0}>Lock</Option>
                 <Option value={1}>Unlock</Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Rcm" name="rcm">
+            <Form.Item label="Rcm" name="RCM">
               <Select>
                 <Option value={2}>Fw</Option>
                 <Option value={4}>Rw</Option>
                 <Option value={1}>Stop</Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Acc" name="acc">
+            <Form.Item label="Acc" name="ACC">
               <InputNumber />
             </Form.Item>
-            <Form.Item label="Dec" name="dec">
-              <InputNumber />
-            </Form.Item>
-          </Form>
-        </Card>
-
-        <Card bordered={false} style={{ width: 300 }}>
-          <Form
-            form={form}
-            layout="vertical"
-            style={{ maxWidth: 600 }}
-          >
-            <Form.Item label="Min Value" name="minValue">
-              <InputNumber />
-            </Form.Item>
-            <Form.Item label="Max Value" name="maxValue">
-              <InputNumber />
-            </Form.Item>
-            <Form.Item label="Set Point Co" name="setPointCo">
+            <Form.Item label="Dec" name="DEC">
               <InputNumber />
             </Form.Item>
           </Form>
@@ -208,18 +227,23 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <Form.Item label="Mode" name="mode">
+            <Form.Item label="OVE" name="OVEDO06">
               <Select>
                 <Option value={0}>Auto</Option>
                 <Option value={1}>Manual</Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Set Frequency" name="setFrequency">
+            <Form.Item label="OVV" name="OVV">
               <InputNumber />
             </Form.Item>
-            <Form.Item label="Set Point T°" name="setPointTemp">
+            <Form.Item label="Min Value" name="ViMinAO1">
               <InputNumber />
             </Form.Item>
+            <Form.Item label="Max Value" name="ViMaxAO1">
+              <InputNumber />
+            </Form.Item>
+
+
           </Form>
         </Card>
 
@@ -229,13 +253,16 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <Form.Item label="P" name="p">
+            <Form.Item label="Set Point Pa" name="SetpointAO1">
               <InputNumber />
             </Form.Item>
-            <Form.Item label="I" name="i">
+            <Form.Item label="P" name="P">
               <InputNumber />
             </Form.Item>
-            <Form.Item label="D" name="d">
+            <Form.Item label="I" name="I">
+              <InputNumber />
+            </Form.Item>
+            <Form.Item label="D" name="D">
               <InputNumber />
             </Form.Item>
           </Form>

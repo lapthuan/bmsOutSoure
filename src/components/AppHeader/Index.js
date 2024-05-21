@@ -22,7 +22,7 @@ function AppHeader() {
   return (
     <div className="AppHeader">
       <Image width={40} src={logoHCMUTE1}></Image>
-      <Typography.Title>CONTROL MONITOR</Typography.Title>
+      <Typography.Title>HỆ THỐNG BÁO CHÁY </Typography.Title>
       <Space>
         <Badge count={comments.length} dot>
           <MailOutlined

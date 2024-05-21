@@ -1,7 +1,7 @@
 import { Card, Space, Statistic } from "antd";
 
 
-const CardNoValue = ({ title, value, icon }) => {
+const CardValue = ({ title, value, icon }) => {
     return (
         <Card>
             <Space direction="horizontal">
@@ -13,4 +13,4 @@ const CardNoValue = ({ title, value, icon }) => {
     );
 }
 
-export default CardNoValue;
+export default CardValue;

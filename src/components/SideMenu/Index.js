@@ -30,9 +30,14 @@ function SideMenu() {
         selectedKeys={[selectedKeys]}
         items={[
           {
-            label: "Điều khiển",
+            label: "Trang chủ",
             icon: <AppstoreOutlined />,
             key: "/",
+          },
+          {
+            label: "Điều khiển",
+            icon: <AppstoreOutlined />,
+            key: "/dieukhien",
           },
           // {
           //   label: "Inventory",
