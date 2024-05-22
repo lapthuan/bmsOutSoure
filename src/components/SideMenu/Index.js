@@ -1,8 +1,8 @@
 import {
   AppstoreOutlined,
-  ShopOutlined,
-  ShoppingCartOutlined,
-  UserOutlined,
+  ControlFilled,
+  ControlOutlined,
+
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ function SideMenu() {
           },
           {
             label: "Điều khiển",
-            icon: <AppstoreOutlined />,
+            icon: <ControlOutlined />,
             key: "/dieukhien",
           },
           // {

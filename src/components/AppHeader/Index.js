@@ -21,10 +21,10 @@ function AppHeader() {
 
   return (
     <div className="AppHeader">
-      <Image width={40} src={logoHCMUTE1}></Image>
-      <Typography.Title>HỆ THỐNG BÁO CHÁY </Typography.Title>
+      <Image  width={40} src={logoHCMUTE1}></Image>
+      <Typography.Title >HỆ THỐNG CHỮA CHÁY TỰ ĐỘNG </Typography.Title>
       <Space>
-        <Badge count={comments.length} dot>
+        {/* <Badge count={comments.length} dot>
           <MailOutlined
             style={{ fontSize: 24 }}
             onClick={() => {
@@ -39,7 +39,7 @@ function AppHeader() {
               setNotificationsOpen(true);
             }}
           />
-        </Badge>
+        </Badge> */}
       </Space>
       <Drawer
         title="Comments"

@@ -8,6 +8,7 @@ import { ref, onValue, set } from "firebase/database";
 import { useEffect, useState } from "react";
 import { database } from "../../connect/firebase";
 import CardValue from "../../components/Card/CardValue";
+import CardValueDot from "../../components/Card/CardValueDot";
 
 const { Option } = Select;
 
@@ -23,18 +24,18 @@ function Dashboard() {
       console.log(dataObject);
       setCurrentData(dataObject);
       const formData = {
-        LOCK: dataObject.LOCK.data,
-        RCM: dataObject.RCM.data,
-        ACC: Number(dataObject.ACC.data),
-        DEC: Number(dataObject.DEC.data),
-        ViMinAO1: Number(dataObject.ViMinAO1.data),
-        ViMaxAO1: Number(dataObject.ViMaxAO1.data),
-        SetpointAO1: Number(dataObject.SetpointAO1.data),
-        OVV: dataObject.OVV.data,
-        OVEDO06: Number(dataObject.OVEDO06.data),
-        P: Number(dataObject.P.data),
-        I: Number(dataObject.I.data),
-        D: Number(dataObject.D.data)
+        LOCK: dataObject?.LOCK?.data,
+        RCM: dataObject?.RCM?.data,
+        ACC: Number(dataObject?.ACC?.data),
+        DEC: Number(dataObject?.DEC?.data),
+        ViMinAO1: Number(dataObject?.ViMinAO1?.data),
+        ViMaxAO1: Number(dataObject?.ViMaxAO1?.data),
+        SetpointAO1: Number(dataObject?.SetpointAO1?.data),
+        OVV: dataObject?.OVV?.data,
+        OVEDO06: String(dataObject?.OVEDO06?.data),
+        P: Number(dataObject?.P?.data),
+        I: Number(dataObject?.I?.data),
+        D: Number(dataObject?.D?.data)
       };
 
       form.setFieldsValue(formData);
@@ -59,33 +60,36 @@ function Dashboard() {
     form.validateFields()
       .then(values => {
         const formattedData = {
-          "ACC": { "data": values.ACC },
-          "D": { "data": values.D },
-          "DEC": { "data": values.DEC },
-          "I": { "data": values.I },
-          "LOCK": { "data": values.LOCK },
-          "OVEDO06": { "data": values.OVEDO06 },
-          "OVV": { "data": values.OVV },
-          "P": { "data": values.P },
-          "RCM": { "data": values.RCM },
-          "SetpointAO1": { "data": values.SetpointAO1 },
-          "ViMaxAO1": { "data": values.ViMaxAO1 },
-          "ViMinAO1": { "data": values.ViMaxAO1 }
+          "ACC": { "data": String(values.ACC) },
+          "D": { "data": String(values.D) },
+          "DEC": { "data": String(values.DEC) },
+          "I": { "data": String(values.I) },
+          "LOCK": { "data": String(values.LOCK) },
+          "OVEDO06": { "data": String(values.OVEDO06) },
+          "OVV": { "data": String(values.OVV) },
+          "P": { "data": String(values.P) },
+          "RCM": { "data": String(values.RCM) },
+          "SetpointAO1": { "data": String(values.SetpointAO1) },
+          "ViMaxAO1": { "data": String(values.ViMaxAO1) },
+          "ViMinAO1": { "data": String(values.ViMinAO1) }
         };
 
         const updatedData = {
           ...currentData,
           ...formattedData,
         };
-        console.log(updatedData);
+
         const dbRef = ref(database, 'CONTROL');
         set(dbRef, updatedData)
           .then(() => {
+
             message.success("Data updated successfully!");
           })
           .catch((error) => {
             message.error(`Failed to update data: ${error.message}`);
           });
+
+       
       })
       .catch(errorInfo => {
         console.log('Failed:', errorInfo);
@@ -142,6 +146,7 @@ function Dashboard() {
             />
           }
           title={"Tần số"}
+          value={data?.O_HZ?.data}
         />
         <CardValue
           icon={
@@ -173,7 +178,7 @@ function Dashboard() {
           title={"Công suất"}
           value={data?.O_POWER?.data}
         />
-        <CardValue
+        <CardValueDot
           icon={
             <MdSignalCellularAlt
               style={{
@@ -186,6 +191,7 @@ function Dashboard() {
             />
           }
           title={"Trạng thái"}
+          value={currentData?.RCM?.data}
         />
 
       </Space>
@@ -201,15 +207,15 @@ function Dashboard() {
           >
             <Form.Item label="Lock" name="LOCK">
               <Select>
-                <Option value={0}>Lock</Option>
-                <Option value={1}>Unlock</Option>
+                <Option value={"0"}>Lock</Option>
+                <Option value={"1"}>Unlock</Option>
               </Select>
             </Form.Item>
             <Form.Item label="Rcm" name="RCM">
               <Select>
-                <Option value={2}>Fw</Option>
-                <Option value={4}>Rw</Option>
-                <Option value={1}>Stop</Option>
+                <Option value={"2"}>Fw</Option>
+                <Option value={"4"}>Rw</Option>
+                <Option value={"1"}>Stop</Option>
               </Select>
             </Form.Item>
             <Form.Item label="Acc" name="ACC">
@@ -227,10 +233,10 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <Form.Item label="OVE" name="OVEDO06">
+            <Form.Item label="Mode" name="OVEDO06">
               <Select>
-                <Option value={0}>Auto</Option>
-                <Option value={1}>Manual</Option>
+                <Option value={"0"}>Auto</Option>
+                <Option value={"1"}>Manual</Option>
               </Select>
             </Form.Item>
             <Form.Item label="OVV" name="OVV">

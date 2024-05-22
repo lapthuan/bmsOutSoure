@@ -61,5 +61,17 @@
 }
 .bottom-right {
     bottom: 15%;
-    right: 37%;
+    right: 36.5%;
+}
+.right-center{
+    top: 35%;
+    right: 34%;
+}
+.right-center1{
+    top: 35%;
+    right: 17%;
+}
+.right-center2{
+    top: 35%;
+    right: 0%;
 }
