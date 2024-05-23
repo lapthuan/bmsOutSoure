@@ -33,7 +33,7 @@ const Home = () => {
         set(dbRef, value)
             .then(() => {
                 if (value === "1")
-                    message.warning("Fire warning !");
+                    message.warning("Warning !");
             })
             .catch((error) => {
                 message.error(`Failed to update data: ${error.message}`);
@@ -78,15 +78,16 @@ const Home = () => {
                     </div>
                     <div className="card right-center2">
                         <img src={mua} alt="Sample Image" />
-                    </div></>) : ""}
+                    </div>
 
-                <Alert
-                    message="Fire warning !!!"
+                    <Alert
+                        message="Fire warning !!!"
 
-                    type="warning"
-                    showIcon
-                    closable
-                />
+                        type="warning"
+                        showIcon
+                        closable
+                    />
+                </>) : ""}
             </div>
 
         </div>
