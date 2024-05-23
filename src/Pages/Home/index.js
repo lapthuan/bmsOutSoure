@@ -29,6 +29,7 @@ const Home = () => {
 
     const handlerClick = () => {
         const dbRef = ref(database, 'MONITOR/O_Baochay/data');
+        const dbRef2 = ref(database, 'CONTROL/NNKC/data');
         const value = data?.O_Baochay?.data === "1" ? "0" : "1"
         set(dbRef, value)
             .then(() => {
@@ -38,7 +39,7 @@ const Home = () => {
             .catch((error) => {
                 message.error(`Failed to update data: ${error.message}`);
             });
-
+        set(dbRef2, value)
     }
     return (<>
         <Typography.Title style={{
