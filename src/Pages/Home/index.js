@@ -4,7 +4,7 @@ import chuong from "../../Image/chuong.png"
 import chuonggif from "../../Image/chuong.gif"
 import imgbaochay from "../../Image/baochao.png"
 import mua from "../../Image/mua.gif"
-import { Alert, Input, message } from "antd"
+import { Alert, Input, Typography, message } from "antd"
 import LiquidFillGauge from "react-liquid-gauge"
 import { useEffect, useState } from "react"
 import { database } from "../../connect/firebase"
@@ -41,7 +41,11 @@ const Home = () => {
 
     }
     return (<>
+        <Typography.Title style={{
+            fontWeight: 'bold'
+        }} level={2}>Trang chủ</Typography.Title>
         <div className="body-home">
+
             <div className="container-img">
 
                 <img src={img} alt="Sample Image" />
