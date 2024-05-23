@@ -1,14 +1,14 @@
 .body-home{
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:space-evenly;
 }
 
 .container-img {
     position: relative;
     width: 600px; /* Adjust as needed */
     height: 400px; /* Adjust as needed */
-    margin: auto;
+
     margin-top: 20px;
 }
 
