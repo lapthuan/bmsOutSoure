@@ -16,6 +16,7 @@ const { Option } = Select;
 function Dashboard() {
   const [currentData, setCurrentData] = useState({});
   const [data, setData] = useState({});
+  const [pao, setPao] = useState({});
   const [form] = Form.useForm();
   useEffect(() => {
     const dbRef = ref(database, 'CONTROL'); // Đường dẫn đến dữ liệu bạn muốn đọc
@@ -56,6 +57,10 @@ function Dashboard() {
     return () => unsubscribe();
   }, []);
 
+
+
+
+
   const handleSave = () => {
     form.validateFields()
       .then(values => {
@@ -89,19 +94,23 @@ function Dashboard() {
             message.error(`Failed to update data: ${error.message}`);
           });
 
-       
+
       })
       .catch(errorInfo => {
         console.log('Failed:', errorInfo);
       });
   };
   return (
-    <Space size={20} direction="vertical" >
+    <Space size={20} direction="vertical" style={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }} >
       <Typography.Title style={{
         fontWeight: 'bold'
       }} level={2}>Điều khiển</Typography.Title>
       <Typography.Text>MONITOR SYSTERM</Typography.Text>
-      <Space direction="horizontal" align="baseline">
+      <Space
+        direction="horizontal"
+        align="center"
+        style={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }}
+      >
 
         <CardValue
           icon={
@@ -197,7 +206,11 @@ function Dashboard() {
       </Space>
       <Typography.Text>CONTROL SYSTERM</Typography.Text>
       <Button onClick={handleSave}> Save</Button>
-      <Space>
+      <Space
+        direction="horizontal"
+        align="center"
+        style={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }}
+      >
 
         <Card bordered={false} style={{ width: 300 }}>
           <Form

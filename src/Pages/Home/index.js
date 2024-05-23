@@ -4,7 +4,7 @@ import chuong from "../../Image/chuong.png"
 import chuonggif from "../../Image/chuong.gif"
 import imgbaochay from "../../Image/baochao.png"
 import mua from "../../Image/mua.gif"
-import { Input, message } from "antd"
+import { Alert, Input, message } from "antd"
 import LiquidFillGauge from "react-liquid-gauge"
 import { useEffect, useState } from "react"
 import { database } from "../../connect/firebase"
@@ -43,9 +43,10 @@ const Home = () => {
     return (<>
         <div className="body-home">
             <div className="container-img">
+
                 <img src={img} alt="Sample Image" />
 
-                <div className="card-chuong top-left">   <img src={data?.O_Baochay?.data === "1" ? chuonggif : chuong} alt="Sample Image" /></div>
+                <div className="card-chuong top-left">   <img src={data?.O_Baochay?.data === "1" || data?.O_CT?.data === "1" ? chuonggif : chuong} alt="Sample Image" /></div>
                 <div className="card top-right">{data?.O_Pa?.data}</div>
                 <div className="card top-left2">
                     <Input />
@@ -59,11 +60,16 @@ const Home = () => {
                     <LiquidFillGauge
                         width={100}
                         height={100}
-                        value={data?.O_tank?.data === "1" ? 100 : 0}
+                        riseAnimation
+                        waveAnimation
+                        waveFrequency={2}
+                        waveAmplitude={1}
+                        gradient
+                        value={data?.O_tank?.data === "1" ? 80 : 0}
                         textRenderer={() => null} // không hiển thị số
                         percent={""} />
                 </div>
-                {data?.O_Baochay?.data === "1" ? (<>
+                {data?.O_CT?.data === "1" ? (<>
                     <div className="card right-center">
                         <img src={mua} alt="Sample Image" />
                     </div>
@@ -74,8 +80,15 @@ const Home = () => {
                         <img src={mua} alt="Sample Image" />
                     </div></>) : ""}
 
+                <Alert
+                    message="Fire warning !!!"
 
+                    type="warning"
+                    showIcon
+                    closable
+                />
             </div>
+
         </div>
     </>);
 }
