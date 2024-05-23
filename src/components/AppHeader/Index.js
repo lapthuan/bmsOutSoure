@@ -21,7 +21,7 @@ function AppHeader() {
 
   return (
     <div className="AppHeader">
-      <Image  width={40} src={logoHCMUTE1}></Image>
+      <Image width={40} wrapperStyle={{ marginRight: "20px" }} src={logoHCMUTE1}></Image>
       <Typography.Title >HỆ THỐNG CHỮA CHÁY TỰ ĐỘNG </Typography.Title>
       <Space>
         {/* <Badge count={comments.length} dot>
