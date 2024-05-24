@@ -146,6 +146,13 @@ const Home = () => {
                         closable
                     />
                 </>) : ""}
+                {data?.O_tank?.data === "0" && (<Alert
+                    message="Tank warning !!!"
+                    type="warning"
+                    showIcon
+                    closable
+                />)}
+
             </div>
             <Table dataSource={dataTable} columns={columns} pagination={{ pageSize: 8 }} />;
         </div>

@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, InputNumber, Select, Space, Table, Typography, message } from "antd";
+import { Button, Card, Form, Input, InputNumber, Modal, Select, Space, Table, Typography, message } from "antd";
 
 import CardNoValue from "../../components/Card/CardNoValue";
 import { FaBolt, FaWaveSquare } from 'react-icons/fa';
@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { database } from "../../connect/firebase";
 import CardValue from "../../components/Card/CardValue";
 import CardValueDot from "../../components/Card/CardValueDot";
+import ModalDienAp from "../../components/Modal/ModalDienAp";
+import ModalDongDien from "../../components/Modal/ModalDongDien";
 
 const { Option } = Select;
 
@@ -17,12 +19,18 @@ function Dashboard() {
   const [currentData, setCurrentData] = useState({});
   const [data, setData] = useState({});
   const [pao, setPao] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible1, setModalVisible1] = useState(false);
+  const [modalVisible2, setModalVisible2] = useState(false);
+  const [modalVisible3, setModalVisible3] = useState(false);
+  const [modalVisible4, setModalVisible4] = useState(false);
+
   const [form] = Form.useForm();
+  const [form2] = Form.useForm();
   useEffect(() => {
     const dbRef = ref(database, 'CONTROL'); // Đường dẫn đến dữ liệu bạn muốn đọc
     const unsubscribe = onValue(dbRef, (snapshot) => {
       const dataObject = snapshot.val();
-      console.log(dataObject);
       setCurrentData(dataObject);
       const formData = {
         LOCK: dataObject?.LOCK?.data,
@@ -38,7 +46,6 @@ function Dashboard() {
         I: Number(dataObject?.I?.data),
         D: Number(dataObject?.D?.data)
       };
-
       form.setFieldsValue(formData);
     });
 
@@ -50,15 +57,48 @@ function Dashboard() {
     const unsubscribe = onValue(dbRef, (snapshot) => {
       const dataObject = snapshot.val();
       setData(dataObject)
-      console.log(dataObject);
+
+    });
+
+    // Clean up subscription on unmount
+    return () => unsubscribe();
+  }, []);
+  useEffect(() => {
+    const dbRef = ref(database, 'SET'); // Đường dẫn đến dữ liệu bạn muốn đọc
+    const unsubscribe = onValue(dbRef, (snapshot) => {
+      const dataObject = snapshot.val();
+      setPao(dataObject)
+      form2.setFieldsValue({ Pa0: dataObject?.Pa0?.data });
     });
 
     // Clean up subscription on unmount
     return () => unsubscribe();
   }, []);
 
+  const handleSaveSet = () => {
+    form2.validateFields()
+      .then(values => {
+        const formattedData = {
+          "Pa0": { "data": String(values.Pa0) },
+
+        };
+
+        const dbRef = ref(database, 'SET');
+        set(dbRef, formattedData)
+          .then(() => {
+
+            message.success("Data updated successfully!");
+          })
+          .catch((error) => {
+            message.error(`Failed to update data: ${error.message}`);
+          });
 
 
+      })
+      .catch(errorInfo => {
+        console.log('Failed:', errorInfo);
+      });
+  };
 
 
   const handleSave = () => {
@@ -100,17 +140,58 @@ function Dashboard() {
         console.log('Failed:', errorInfo);
       });
   };
+  const handleCardClick = () => {
+    setModalVisible(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
+  const handleCardClick1 = () => {
+    setModalVisible1(true);
+  };
+
+  const handleCloseModal1 = () => {
+    setModalVisible1(false);
+  };
+  const handleCardClick2 = () => {
+    setModalVisible2(true);
+  };
+
+  const handleCloseModal2 = () => {
+    setModalVisible2(false);
+  };
+  const handleCardClick3 = () => {
+    setModalVisible3(true);
+  };
+
+  const handleCloseModal3 = () => {
+    setModalVisible3(false);
+  };
+  const handleCardClick4 = () => {
+    setModalVisible4(true);
+  };
+
+  const handleCloseModal4 = () => {
+    setModalVisible4(false);
+  };
   return (
     <Space size={20} direction="vertical" style={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }} >
+
       <Typography.Title style={{
         fontWeight: 'bold'
       }} level={2}>Điều khiển</Typography.Title>
       <Typography.Text>MONITOR SYSTERM</Typography.Text>
+
       <Space
         direction="horizontal"
         align="center"
         style={{ display: 'flex', justifyContent: 'space-evenly', width: '100%' }}
       >
+        {modalVisible && <ModalDienAp
+          open={modalVisible}
+          onClose={handleCloseModal}
+        />}
 
         <CardValue
           icon={
@@ -124,9 +205,14 @@ function Dashboard() {
               }}
             />
           }
+          onClick={handleCardClick}
           title={"Điện áp"}
           value={data?.O_VOLTAGE?.data}
         />
+        {modalVisible1 && <ModalDongDien
+          open={modalVisible1}
+          onClose={handleCloseModal1}
+        />}
         <CardValue
           icon={
             <FaWaveSquare
@@ -140,6 +226,7 @@ function Dashboard() {
             />
           }
           title={"Dòng điện"}
+          onClick={handleCardClick1}
           value={data?.O_CURRENT?.data}
         />
         <CardValue
@@ -286,8 +373,20 @@ function Dashboard() {
             </Form.Item>
           </Form>
         </Card>
-
+        <Card bordered={false} title={"SET ngưỡng"} style={{ width: 300 }}>
+          <Form
+            form={form2}
+            layout="vertical"
+            style={{ maxWidth: 600 }}
+          >
+            <Form.Item label="Set Pa" name="Pa0">
+              <InputNumber />
+            </Form.Item>
+            <Button onClick={handleSaveSet}> Save</Button>
+          </Form>
+        </Card>
       </Space>
+
 
 
     </Space >

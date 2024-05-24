@@ -1,9 +1,9 @@
 import { Card, Space, Statistic } from "antd";
 
 
-const CardValue = ({ title, value, icon }) => {
+const CardValue = ({ title, value, icon, onClick }) => {
     return (
-        <Card style={{ width: "200px", height: "100px" }}>
+        <Card style={{ width: "200px", height: "100px" }} onClick={onClick}>
             <Space direction="horizontal">
                 {icon}
                 <Statistic title={title} value={value} />
