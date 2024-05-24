@@ -15,7 +15,7 @@ const ModalDongDien = ({ open, onClose }) => {
             const dbRef = ref(database, 'MONITOR');
             onValue(dbRef, (snapshot) => {
                 const dataObject = snapshot.val();
-           
+
                 setDataChart(prevData => [...prevData, dataObject?.O_CURRENT?.data]);
             });
         };
@@ -32,8 +32,8 @@ const ModalDongDien = ({ open, onClose }) => {
                 label: 'Dòng điện',
                 data: dataChart,
                 fill: false,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
+                backgroundColor: 'rgba(0,0,255,0.25)',
+                borderColor: 'rgba(0,0,255,0.25)',
             },
         ],
     };

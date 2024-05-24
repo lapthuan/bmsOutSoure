@@ -16,7 +16,7 @@ const ModalCongSuat = ({ open, onClose }) => {
             onValue(dbRef, (snapshot) => {
                 const dataObject = snapshot.val();
                 console.log(dataObject);
-                setDataChart(prevData => [...prevData, dataObject?.O_VOLTAGE?.data]);
+                setDataChart(prevData => [...prevData, dataObject?.O_POWER?.data]);
             });
         };
 
@@ -29,11 +29,11 @@ const ModalCongSuat = ({ open, onClose }) => {
         labels: dataChart.map((_, index) => index),
         datasets: [
             {
-                label: 'Điện áp',
+                label: 'Công suất',
                 data: dataChart,
                 fill: false,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
+                backgroundColor: 'rgba(255,0,0,0.25)',
+                borderColor: 'rgba(255,0,0,0.25)',
             },
         ],
     };

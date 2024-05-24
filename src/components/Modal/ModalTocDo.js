@@ -16,7 +16,7 @@ const ModalTocDo = ({ open, onClose }) => {
             onValue(dbRef, (snapshot) => {
                 const dataObject = snapshot.val();
                 console.log(dataObject);
-                setDataChart(prevData => [...prevData, dataObject?.O_VOLTAGE?.data]);
+                setDataChart(prevData => [...prevData, dataObject?.O_RPM?.data]);
             });
         };
 
@@ -29,11 +29,11 @@ const ModalTocDo = ({ open, onClose }) => {
         labels: dataChart.map((_, index) => index),
         datasets: [
             {
-                label: 'Điện áp',
+                label: 'Tốc độ',
                 data: dataChart,
                 fill: false,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
+                backgroundColor: 'rgba(128,0,128,0.25)',
+                borderColor: 'rgba(128,0,128,0.25)',
             },
         ],
     };
@@ -51,4 +51,4 @@ const ModalTocDo = ({ open, onClose }) => {
     </>);
 }
 
-export default ModalDienAp;
+export default ModalTocDo;

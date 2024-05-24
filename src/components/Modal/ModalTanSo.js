@@ -16,7 +16,7 @@ const ModalTanSo = ({ open, onClose }) => {
             onValue(dbRef, (snapshot) => {
                 const dataObject = snapshot.val();
                 console.log(dataObject);
-                setDataChart(prevData => [...prevData, dataObject?.O_VOLTAGE?.data]);
+                setDataChart(prevData => [...prevData, dataObject?.O_HZ?.data]);
             });
         };
 
@@ -29,11 +29,11 @@ const ModalTanSo = ({ open, onClose }) => {
         labels: dataChart.map((_, index) => index),
         datasets: [
             {
-                label: 'Điện áp',
+                label: 'Tần số',
                 data: dataChart,
                 fill: false,
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(75,192,192,1)',
+                backgroundColor: 'rgba(255,165,0,0.25)',
+                borderColor: 'rgba(255,165,0,0.25)',
             },
         ],
     };

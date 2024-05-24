@@ -11,6 +11,9 @@ import CardValue from "../../components/Card/CardValue";
 import CardValueDot from "../../components/Card/CardValueDot";
 import ModalDienAp from "../../components/Modal/ModalDienAp";
 import ModalDongDien from "../../components/Modal/ModalDongDien";
+import ModalTanSo from "../../components/Modal/ModalTanSo";
+import ModalTocDo from "../../components/Modal/ModalTocDo";
+import ModalCongSuat from "../../components/Modal/ModalCongSuat";
 
 const { Option } = Select;
 
@@ -229,6 +232,10 @@ function Dashboard() {
           onClick={handleCardClick1}
           value={data?.O_CURRENT?.data}
         />
+        {modalVisible2 && <ModalTanSo
+          open={modalVisible2}
+          onClose={handleCloseModal2}
+        />}
         <CardValue
           icon={
             <IoMdFlash
@@ -241,9 +248,14 @@ function Dashboard() {
               }}
             />
           }
+          onClick={handleCardClick2}
           title={"Tần số"}
           value={data?.O_HZ?.data}
         />
+        {modalVisible3 && <ModalTocDo
+          open={modalVisible3}
+          onClose={handleCloseModal3}
+        />}
         <CardValue
           icon={
             <MdSpeed
@@ -256,9 +268,14 @@ function Dashboard() {
               }}
             />
           }
+          onClick={handleCardClick3}
           title={"Tốc độ"}
           value={data?.O_RPM?.data}
         />
+        {modalVisible4 && <ModalCongSuat
+          open={modalVisible4}
+          onClose={handleCloseModal4}
+        />}
         <CardValue
           icon={
             <MdPower
@@ -271,6 +288,7 @@ function Dashboard() {
               }}
             />
           }
+          onClick={handleCardClick4}
           title={"Công suất"}
           value={data?.O_POWER?.data}
         />
