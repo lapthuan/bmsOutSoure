@@ -31,7 +31,7 @@ const columns = [
 ];
 const Home = () => {
     const [data, setData] = useState({})
-    const [dataTable, setDataTable] = useState([])
+    const [dataTables, setDataTables] = useState([])
 
     useEffect(() => {
         const dbRef = ref(database, 'MONITOR'); // Đường dẫn đến dữ liệu bạn muốn đọc
@@ -53,7 +53,7 @@ const Home = () => {
                     fire: dataObject[key].fire,
                 }));
                 const reversedData = dataNew.slice().reverse();
-                setDataTable(reversedData)
+                setDataTables(reversedData)
             } catch (error) {
 
                 console.error('Error processing data:', error);
@@ -164,7 +164,7 @@ const Home = () => {
                 />)}
 
             </div>
-            <Table dataSource={dataTable} columns={columns} pagination={{ pageSize: 8 }} />;
+            <Table dataSource={dataTables} columns={columns} pagination={{ pageSize: 8 }} />;
         </div>
 
     </>);
