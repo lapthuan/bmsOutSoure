@@ -55,7 +55,7 @@ const Home = () => {
                 const reversedData = dataNew.slice().reverse();
                 setDataTable(reversedData)
             } catch (error) {
-                message.error('Error processing data');
+
                 console.error('Error processing data:', error);
             }
 
