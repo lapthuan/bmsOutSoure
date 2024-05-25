@@ -69,21 +69,21 @@ const Home = () => {
         const interval = setInterval(() => {
             const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
             const timestamp2 = new Date().toISOString();
-            if (data?.O_Baochay?.data === "1") {
-                if (data?.O_CT?.data === "1") {
+            if (data?.O_CT?.data === "1") {
 
-                    set(ref(database, 'LOG/' + timestamp), {
-                        timestamp: timestamp2,
-                        fire: "Có cháy"
-                    })
-                } else {
+                set(ref(database, 'LOG/' + timestamp), {
+                    timestamp: timestamp2,
+                    fire: "Có cháy"
+                })
+            } else {
+                if (data?.O_Baochay?.data === "1") {
                     set(ref(database, 'LOG/' + timestamp), {
                         timestamp: timestamp2,
                         fire: "Cảnh báo cháy"
                     })
                 }
-
             }
+
 
         }, 60 * 1000); // 15 phút
 
