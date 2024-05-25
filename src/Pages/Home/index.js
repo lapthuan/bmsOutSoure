@@ -97,7 +97,7 @@ const Home = () => {
         set(dbRef, value)
             .then(() => {
                 if (value === "1")
-                    message.warning("Warning !");
+                    message.error("Warning !");
             })
             .catch((error) => {
                 message.error(`Failed to update data: ${error.message}`);
@@ -151,14 +151,14 @@ const Home = () => {
                     <Alert
                         message="Fire warning !!!"
 
-                        type="warning"
+                        type="error"
                         showIcon
                         closable
                     />
                 </>) : ""}
                 {data?.O_tank?.data === "0" && (<Alert
                     message="Tank warning !!!"
-                    type="warning"
+                    type="error"
                     showIcon
                     closable
                 />)}
