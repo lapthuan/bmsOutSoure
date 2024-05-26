@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Hệ Thống Chữa Cháy Sử Dụng Firebase Realtime và ReactJS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Giới Thiệu
 
-## Available Scripts
+Hệ thống chữa cháy sử dụng Firebase Realtime và ReactJS là một ứng dụng web cho phép giám sát và quản lý các sự kiện liên quan đến cháy nổ trong thời gian thực. Hệ thống này sử dụng Firebase Realtime Database để lưu trữ và cập nhật dữ liệu ngay lập tức, cùng với ReactJS để tạo giao diện người dùng thân thiện và tương tác.
 
-In the project directory, you can run:
+## Các Chức Năng Chính
 
-### `npm start`
+1. **Giám sát thời gian thực**: Hiển thị trạng thái hiện tại của các cảm biến cháy trên giao diện web.
+2. **Thông báo sự cố**: Gửi thông báo đến người dùng khi phát hiện sự cố cháy.
+3. **Quản lý cảm biến**: Thêm, xóa và cập nhật thông tin cảm biến.
+4. **Lịch sử sự cố**: Lưu trữ và hiển thị lịch sử các sự cố cháy đã xảy ra.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Yêu Cầu Hệ Thống
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js và npm (hoặc yarn)
+- Tài khoản Firebase
+- Trình duyệt web (Chrome, Firefox, etc.)
 
-### `npm test`
+## Cài Đặt
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Clone Repository
 
-### `npm run build`
+```bash
+git clone https://github.com/lapthuan/bmsOutSoure.git
+cd bmsOutSoure
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. Cài Đặt Các Thư Viện Cần Thiết
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Sử dụng npm:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm install
+```
 
-### `npm run eject`
+Hoặc sử dụng yarn:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+yarn install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 3. Cấu Hình Firebase
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Tạo một dự án mới trên Firebase và cấu hình Realtime Database. Sau đó, tạo một file `.env` ở thư mục gốc của dự án và thêm các biến môi trường sau:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```env
+REACT_APP_FIREBASE_API_KEY=your_api_key
+REACT_APP_FIREBASE_AUTH_DOMAIN=your_auth_domain
+REACT_APP_FIREBASE_DATABASE_URL=your_database_url
+REACT_APP_FIREBASE_PROJECT_ID=your_project_id
+REACT_APP_FIREBASE_STORAGE_BUCKET=your_storage_bucket
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+REACT_APP_FIREBASE_APP_ID=your_app_id
+```
 
-## Learn More
+### 4. Chạy Ứng Dụng
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Sử dụng npm:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm start
+```
 
-### Code Splitting
+Hoặc sử dụng yarn:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+yarn start
+```
 
-### Analyzing the Bundle Size
+## Cấu Trúc Thư Mục
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- `src/`: Thư mục chứa mã nguồn của ứng dụng React.
+  - `components/`: Chứa các component React.
+  - `services/`: Chứa các dịch vụ tương tác với Firebase.
+  - `App.js`: Component chính của ứng dụng.
+  - `index.js`: Điểm bắt đầu của ứng dụng.
 
-### Making a Progressive Web App
+## Hướng Dẫn Sử Dụng
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **Giám sát thời gian thực**: Truy cập giao diện chính để xem trạng thái của các cảm biến cháy.
+2. **Thông báo sự cố**: Khi có sự cố cháy, thông báo sẽ xuất hiện trên giao diện và gửi tới email/sms (nếu cấu hình).
+3. **Quản lý cảm biến**: Truy cập phần quản lý cảm biến để thêm, xóa hoặc cập nhật thông tin cảm biến.
+4. **Lịch sử sự cố**: Xem lịch sử sự cố để kiểm tra các sự kiện cháy đã xảy ra.
 
-### Advanced Configuration
+## Đóng Góp
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Nếu bạn muốn đóng góp vào dự án, vui lòng tạo một pull request hoặc liên hệ với chúng tôi qua email: support@example.com.
 
-### Deployment
+## Giấy Phép
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Dự án này được phát hành dưới giấy phép MIT. Xem chi tiết trong file LICENSE.
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Chúc bạn sử dụng hệ thống hiệu quả và an toàn!
