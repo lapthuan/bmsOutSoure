@@ -37,6 +37,27 @@ const ModalTocDo = ({ open, onClose }) => {
             },
         ],
     };
+    const chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Tốc độ (Rpm)' // Thêm đơn vị vào trục y
+                }
+            },
+
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (tooltipItem) {
+                        return tooltipItem.dataset.label + ': ' + tooltipItem.raw + ' Rpm'; // Thêm đơn vị vào tooltip
+                    }
+                }
+            }
+        }
+    };
     return (<>
 
         <Modal
@@ -45,7 +66,7 @@ const ModalTocDo = ({ open, onClose }) => {
             onCancel={onClose}
             footer={null}
         >
-            <Line data={chartData} />
+            <Line data={chartData} options={chartOptions} />
         </Modal>
 
     </>);

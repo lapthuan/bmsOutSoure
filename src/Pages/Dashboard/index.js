@@ -210,7 +210,7 @@ function Dashboard() {
           }
           onClick={handleCardClick}
           title={"Điện áp"}
-          value={data?.O_VOLTAGE?.data}
+          value={data?.O_VOLTAGE?.data + " V"}
         />
         {modalVisible1 && <ModalDongDien
           open={modalVisible1}
@@ -230,7 +230,7 @@ function Dashboard() {
           }
           title={"Dòng điện"}
           onClick={handleCardClick1}
-          value={data?.O_CURRENT?.data}
+          value={data?.O_CURRENT?.data + " A"}
         />
         {modalVisible2 && <ModalTanSo
           open={modalVisible2}
@@ -250,7 +250,7 @@ function Dashboard() {
           }
           onClick={handleCardClick2}
           title={"Tần số"}
-          value={data?.O_HZ?.data}
+          value={data?.O_HZ?.data  + " Hz"}
         />
         {modalVisible3 && <ModalTocDo
           open={modalVisible3}
@@ -270,7 +270,7 @@ function Dashboard() {
           }
           onClick={handleCardClick3}
           title={"Tốc độ"}
-          value={data?.O_RPM?.data}
+          value={data?.O_RPM?.data + " Rpm"}
         />
         {modalVisible4 && <ModalCongSuat
           open={modalVisible4}
@@ -290,7 +290,7 @@ function Dashboard() {
           }
           onClick={handleCardClick4}
           title={"Công suất"}
-          value={data?.O_POWER?.data}
+          value={data?.O_POWER?.data + " W"}
         />
         <CardValueDot
           icon={

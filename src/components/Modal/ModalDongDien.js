@@ -37,6 +37,27 @@ const ModalDongDien = ({ open, onClose }) => {
             },
         ],
     };
+    const chartOptions = {
+        responsive: true,
+        scales: {
+            y: {
+                title: {
+                    display: true,
+                    text: 'Dòng điện (A)' // Thêm đơn vị vào trục y
+                }
+            },
+
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (tooltipItem) {
+                        return tooltipItem.dataset.label + ': ' + tooltipItem.raw + ' A'; // Thêm đơn vị vào tooltip
+                    }
+                }
+            }
+        }
+    };
     return (<>
 
         <Modal
@@ -45,7 +66,7 @@ const ModalDongDien = ({ open, onClose }) => {
             onCancel={onClose}
             footer={null}
         >
-            <Line data={chartData} />
+            <Line data={chartData} options={chartOptions} />
         </Modal>
 
     </>);

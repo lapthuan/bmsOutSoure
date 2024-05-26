@@ -115,7 +115,7 @@ const Home = () => {
                 <img src={img} alt="Sample Image" />
 
                 <div className="card-chuong top-left">   <img src={data?.O_Baochay?.data === "1" || data?.O_CT?.data === "1" ? chuonggif : chuong} alt="Sample Image" /></div>
-                <div className="card top-right">{data?.O_Pa?.data}</div>
+                <div className="card top-right">{data?.O_Pa?.data} Pa</div>
                 <div className="card top-left2">
                     <Input />
                     <hr />
