@@ -1,7 +1,6 @@
 import { BellFilled, MailOutlined } from "@ant-design/icons";
 import { Badge, Drawer, Image, List, Space, Typography } from "antd";
 import { useEffect, useState } from "react";
-import { getComments, getOrders } from "../../API";
 import logoHCMUTE1 from "./logo HCMUTE1.jpg";
 
 function AppHeader() {
@@ -41,41 +40,7 @@ function AppHeader() {
           />
         </Badge> */}
       </Space>
-      <Drawer
-        title="Comments"
-        open={commentsOpen}
-        onClose={() => {
-          setCommentsOpen(false);
-        }}
-        maskClosable
-      >
-        <List
-          dataSource={comments}
-          renderItem={(item) => {
-            return <List.Item>{item.body}</List.Item>;
-          }}
-        ></List>
-      </Drawer>
-      <Drawer
-        title="Notifications"
-        open={notificationsOpen}
-        onClose={() => {
-          setNotificationsOpen(false);
-        }}
-        maskClosable
-      >
-        <List
-          dataSource={orders}
-          renderItem={(item) => {
-            return (
-              <List.Item>
-                <Typography.Text strong>{item.title}</Typography.Text> has been
-                ordered!
-              </List.Item>
-            );
-          }}
-        ></List>
-      </Drawer>
+
     </div>
   );
 }
