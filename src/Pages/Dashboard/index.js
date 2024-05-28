@@ -404,14 +404,14 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <p> Ngưỡng</p>
+            <p>Áp suất tối đa</p>
             <Switch
               checkedChildren="Đã mở"
               unCheckedChildren="Đã tắt"
               checked={isChecked}
               onChange={handleChange}
             />
-            <Form.Item label="Set Pa" name="Pa0" >
+            <Form.Item label="Áp suất tối đa" name="Pa0" >
               <InputNumber />
             </Form.Item>
             <Button onClick={handleSaveSet}> Save</Button>
