@@ -1,6 +1,5 @@
-import { Button, Card, Form, Input, InputNumber, Modal, Select, Space, Table, Typography, message } from "antd";
+import { Button, Card, Form, Input, InputNumber, Switch, Select, Space, Table, Typography, message } from "antd";
 
-import CardNoValue from "../../components/Card/CardNoValue";
 import { FaBolt, FaWaveSquare } from 'react-icons/fa';
 import { MdSpeed, MdPower, MdSignalCellularAlt } from 'react-icons/md';
 import { IoMdFlash } from 'react-icons/io';
@@ -27,6 +26,7 @@ function Dashboard() {
   const [modalVisible2, setModalVisible2] = useState(false);
   const [modalVisible3, setModalVisible3] = useState(false);
   const [modalVisible4, setModalVisible4] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const [form] = Form.useForm();
   const [form2] = Form.useForm();
@@ -35,6 +35,8 @@ function Dashboard() {
     const unsubscribe = onValue(dbRef, (snapshot) => {
       const dataObject = snapshot.val();
       setCurrentData(dataObject);
+      setIsChecked(dataObject?.thresholdPa?.status)
+
       const formData = {
         LOCK: dataObject?.LOCK?.data,
         RCM: dataObject?.RCM?.data,
@@ -55,6 +57,11 @@ function Dashboard() {
     // Clean up subscription on unmount
     return () => unsubscribe();
   }, []);
+  const handleChange = (checked) => {
+    setIsChecked(checked);
+    const switchRef = ref(database, "CONTROL/thresholdPa/status");
+    set(switchRef, checked);
+  };
   useEffect(() => {
     const dbRef = ref(database, 'MONITOR'); // Đường dẫn đến dữ liệu bạn muốn đọc
     const unsubscribe = onValue(dbRef, (snapshot) => {
@@ -250,7 +257,7 @@ function Dashboard() {
           }
           onClick={handleCardClick2}
           title={"Tần số"}
-          value={data?.O_HZ?.data  + " Hz"}
+          value={data?.O_HZ?.data + " Hz"}
         />
         {modalVisible3 && <ModalTocDo
           open={modalVisible3}
@@ -397,7 +404,14 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <Form.Item label="Set Pa" name="Pa0">
+            <p> Ngưỡng</p>
+            <Switch
+              checkedChildren="Đã mở"
+              unCheckedChildren="Đã tắt"
+              checked={isChecked}
+              onChange={handleChange}
+            />
+            <Form.Item label="Set Pa" name="Pa0" >
               <InputNumber />
             </Form.Item>
             <Button onClick={handleSaveSet}> Save</Button>
