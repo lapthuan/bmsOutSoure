@@ -398,7 +398,7 @@ function Dashboard() {
             </Form.Item>
           </Form>
         </Card>
-        <Card bordered={false} title={"SET ngưỡng"} style={{ width: 300 }}>
+        <Card bordered={false} title={"SET áp suất tối đa"} style={{ width: 300 }}>
           <Form
             form={form2}
             layout="vertical"
