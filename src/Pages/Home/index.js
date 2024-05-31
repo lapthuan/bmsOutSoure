@@ -32,7 +32,30 @@ const columns = [
 const Home = () => {
     const [data, setData] = useState({})
     const [dataTables, setDataTables] = useState([])
-
+    const [value1, setValue1] = useState('');
+    const [value2, setValue2] = useState('');
+    useEffect(() => {
+        const savedValue1 = localStorage.getItem('inputValue1');
+        const savedValue2 = localStorage.getItem('inputValue2');
+        if (savedValue1) {
+            setValue1(savedValue1);
+        }
+        if (savedValue2) {
+            setValue2(savedValue2);
+        }
+    }, []);
+    useEffect(() => {
+        localStorage.setItem('inputValue1', value1);
+    }, [value1]);
+    useEffect(() => {
+        localStorage.setItem('inputValue2', value2);
+    }, [value2]);
+    const handleChange1 = (e) => {
+        setValue1(e.target.value);
+    };
+    const handleChange2 = (e) => {
+        setValue2(e.target.value);
+    };
     useEffect(() => {
         const dbRef = ref(database, 'MONITOR'); // Đường dẫn đến dữ liệu bạn muốn đọc
         const unsubscribe = onValue(dbRef, (snapshot) => {
@@ -92,9 +115,11 @@ const Home = () => {
                 <div className="card-chuong top-left">   <img src={data?.O_Baochay?.data === "1" || data?.O_CT?.data === "1" ? chuonggif : chuong} alt="Sample Image" /></div>
                 <div className="card top-right">{data?.O_Pa?.data} Pa</div>
                 <div className="card top-left2">
-                    <Input />
+                    <Input value={value1}
+                        onChange={handleChange1} />
                     <hr />
-                    <Input />
+                    <Input value={value2}
+                        onChange={handleChange2} />
                 </div>
                 <div className="card-baochay top-left3" onClick={handlerClick}>
                     <img src={imgbaochay} alt="Sample Image" />
@@ -112,7 +137,7 @@ const Home = () => {
                         textRenderer={() => null} // không hiển thị số
                         percent={""} />
                 </div>
-                {data?.O_CT?.data === "1" ? (<>
+                {data?.O_CT?.data === "0" ? (<>
                     <div className="card right-center">
                         <img src={mua} alt="Sample Image" />
                     </div>
