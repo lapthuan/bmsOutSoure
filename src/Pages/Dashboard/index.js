@@ -384,7 +384,7 @@ function Dashboard() {
             layout="vertical"
             style={{ maxWidth: 600 }}
           >
-            <Form.Item label="Set Point Pa" name="SetpointAO1">
+            <Form.Item label="Set Point bar" name="SetpointAO1">
               <InputNumber />
             </Form.Item>
             <Form.Item label="P" name="P">
