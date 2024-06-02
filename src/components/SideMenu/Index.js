@@ -4,7 +4,7 @@ import {
   ControlOutlined,
 
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import { Card, Menu } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -19,6 +19,7 @@ function SideMenu() {
 
   const navigate = useNavigate();
   return (
+  
     <div className="SideMenu">
       <Menu
         className="SideMenuVertical"
@@ -56,7 +57,9 @@ function SideMenu() {
           // },
         ]}
       ></Menu>
+  
     </div>
+   
   );
 }
 export default SideMenu;

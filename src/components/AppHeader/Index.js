@@ -1,4 +1,4 @@
-import { Badge, Drawer, Image, List, Space, Typography } from "antd";
+import { Badge, Card, Drawer, Image, List, Space, Typography } from "antd";
 
 import logoHCMUTE1 from "./logo HCMUTE1.jpg";
 
@@ -7,26 +7,16 @@ function AppHeader() {
 
   return (
     <div className="AppHeader">
-      <Image width={40} wrapperStyle={{ marginRight: "20px" }} src={logoHCMUTE1}></Image>
+      <div className="info-img">
+        <Image width={40} wrapperStyle={{ marginRight: "20px" }} src={logoHCMUTE1}></Image>
+      </div>
+
       <Typography.Title >HỆ THỐNG CHỮA CHÁY TỰ ĐỘNG </Typography.Title>
-      <Space>
-        {/* <Badge count={comments.length} dot>
-          <MailOutlined
-            style={{ fontSize: 24 }}
-            onClick={() => {
-              setCommentsOpen(true);
-            }}
-          />
-        </Badge>
-        <Badge count={orders.length}>
-          <BellFilled
-            style={{ fontSize: 24 }}
-            onClick={() => {
-              setNotificationsOpen(true);
-            }}
-          />
-        </Badge> */}
-      </Space>
+      <div className="info">
+        NHÓM 9<br />
+        Lê Vĩnh Nghi      20142538<br />
+        Dương Công Nghĩa  20142539
+      </div>
 
     </div>
   );
