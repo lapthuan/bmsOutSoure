@@ -4,12 +4,15 @@ import chuong from "../../Image/chuong.png"
 import chuonggif from "../../Image/chuong.gif"
 import imgbaochay from "../../Image/baochao.png"
 import mua from "../../Image/mua.gif"
+import lua from "../../Image/fire.gif"
+import ring from "./ring.m4a"
 import { Alert, Input, Table, Typography, message } from "antd"
 import LiquidFillGauge from "react-liquid-gauge"
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { database } from "../../connect/firebase"
 import { onValue, ref, set } from "firebase/database"
 import { format } from 'date-fns';
+import ReactAudioPlayer from "react-audio-player"
 
 const columns = [
     {
@@ -34,6 +37,7 @@ const Home = () => {
     const [dataTables, setDataTables] = useState([])
     const [value1, setValue1] = useState('');
     const [value2, setValue2] = useState('');
+    const [key, setKey] = useState(0);
     useEffect(() => {
         const savedValue1 = localStorage.getItem('inputValue1');
         const savedValue2 = localStorage.getItem('inputValue2');
@@ -44,6 +48,7 @@ const Home = () => {
             setValue2(savedValue2);
         }
     }, []);
+
     useEffect(() => {
         localStorage.setItem('inputValue1', value1);
     }, [value1]);
@@ -56,12 +61,14 @@ const Home = () => {
     const handleChange2 = (e) => {
         setValue2(e.target.value);
     };
+
     useEffect(() => {
         const dbRef = ref(database, 'MONITOR'); // Đường dẫn đến dữ liệu bạn muốn đọc
         const unsubscribe = onValue(dbRef, (snapshot) => {
             const dataObject = snapshot.val();
             setData(dataObject)
-            console.log(dataObject);
+
+
         });
 
         const dbRef1 = ref(database, 'LOG')
@@ -87,7 +94,11 @@ const Home = () => {
         return () => unsubscribe();
 
     }, []);
-
+    useEffect(() => {
+        if (data?.O_CT?.data === "0") {
+            setKey(prevKey => prevKey + 1); // Trigger component remount when data changes
+        }
+    }, [data]);
     const handlerClick = () => {
         const dbRef = ref(database, 'MONITOR/O_Baochay/data');
         const dbRef2 = ref(database, 'CONTROL/NNKC/data');
@@ -137,7 +148,9 @@ const Home = () => {
                         textRenderer={() => null} // không hiển thị số
                         percent={""} />
                 </div>
+
                 {data?.O_CT?.data === "0" ? (<>
+                    <audio autoPlay loop src={ring}></audio>
                     <div className="card right-center">
                         <img src={mua} alt="Sample Image" />
                     </div>
@@ -146,6 +159,31 @@ const Home = () => {
                     </div>
                     <div className="card right-center2">
                         <img src={mua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire1">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire2">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire3">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+
+                    <div className="card bottom-fire4">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire5">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire6">
+                        <img src={lua} alt="Sample Image" />
+                    </div>
+                    <div className="card bottom-fire7">
+                        <img src={lua} alt="Sample Image" />
                     </div>
 
                     <Alert
