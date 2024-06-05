@@ -150,28 +150,34 @@ const Home = () => {
                 </div>
                 <div className="card zone1">
                     Zone 1
-                    <div className="dot" style={{ backgroundColor: data?.O_CT?.data === "0" ? "red" : "green" }}></div>
+                    <div className="dot" style={{ backgroundColor: data?.O_Z1?.data === "0" ? "red" : "green" }}></div>
                 </div>
                 <div className="card zone2">
                     Zone 2
-                    <div className="dot" style={{ backgroundColor: data?.O_CT?.data === "0" ? "red" : "green" }}></div>
+                    <div className="dot" style={{ backgroundColor: data?.O_Z2?.data === "0" ? "red" : "green" }}></div>
                 </div>
                 <div className="card zone3">
                     Zone 3
-                    <div className="dot" style={{ backgroundColor: data?.O_CT?.data === "0" ? "red" : "green" }}></div>
+                    <div className="dot" style={{ backgroundColor: data?.O_Z3?.data === "0" ? "red" : "green" }}></div>
                 </div>
 
                 {data?.O_CT?.data === "0" ? (<>
                     <audio autoPlay loop src={ring}></audio>
-                    <div className="card right-center">
-                        <img src={mua} alt="Sample Image" />
-                    </div>
-                    <div className="card right-center1">
-                        <img src={mua} alt="Sample Image" />
-                    </div>
-                    <div className="card right-center2">
-                        <img src={mua} alt="Sample Image" />
-                    </div>
+                    {data?.O_Z1?.data == "1" && (
+                        <div className="card right-center">
+                            <img src={mua} alt="Sample Image" />
+                        </div>
+                    )}
+                    {data?.O_Z2?.data == "1" && (
+                        <div className="card right-center1">
+                            <img src={mua} alt="Sample Image" />
+                        </div>
+                    )}
+                    {data?.O_Z3?.data == "1" && (
+                        <div className="card right-center2">
+                            <img src={mua} alt="Sample Image" />
+                        </div>
+                    )}
                     <div className="card bottom-fire">
                         <img src={lua} alt="Sample Image" />
                     </div>
