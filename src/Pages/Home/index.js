@@ -148,6 +148,18 @@ const Home = () => {
                         textRenderer={() => null} // không hiển thị số
                         percent={""} />
                 </div>
+                <div className="card zone1">
+                    Zone 1
+                    <div className="dot" style={{ backgroundColor: data?.O_CT?.data === "0" ? "red" : "green" }}></div>
+                </div>
+                <div className="card zone2">
+                    Zone 2
+                    <div className="dot" style={{ backgroundColor: data?.O_CT?.data === "0" ? "red" : "green" }}></div>
+                </div>
+                <div className="card zone3">
+                    Zone 3
+                    <div className="dot" style={{ backgroundColor: data?.O_CT?.data === "0" ? "red" : "green" }}></div>
+                </div>
 
                 {data?.O_CT?.data === "0" ? (<>
                     <audio autoPlay loop src={ring}></audio>
